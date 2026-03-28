@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Parihar - Flutter Developer</title>
+    <meta name="description"
+        content="Portfolio of Vinay Parihar, a Flutter Developer with 1.5+ years of experience building scalable Android and iOS applications.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Glassmorphism & Colors */
+            --glass-bg: rgba(25, 25, 35, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.15);
+
+            --text-main: #ffffff;
+            --text-muted: #e2e8f0;
+            --text-light: #cbd5e1;
+
+            --primary: #00f2fe;
+            --primary-hover: #4facfe;
+            --secondary: rgba(255, 255, 255, 0.1);
+            --secondary-hover: rgba(255, 255, 255, 0.2);
+
+            /* Shadows & Borders */
+            --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 8px 32px 0 rgba(0, 242, 254, 0.3);
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-full: 9999px;
+
+            /* Typography */
+            --font-sans: 'Outfit', sans-serif;
+        }
+
+        /* Reset */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background */
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            background: linear-gradient(-45deg, #0f172a, #31083d, #082d4f, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Floating Animated Background Shapes */
+        .bg-shape {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(79, 172, 254, 0.3);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 107, 107, 0.2);
+            bottom: -200px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .shape-3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(144, 19, 254, 0.3);
+            top: 40%;
+            left: 50%;
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            100% {
+                transform: translateY(-50px) scale(1.1);
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        section {
+            padding: 100px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--text-main);
+            letter-spacing: -0.025em;
+            text-transform: uppercase;
+            background: -webkit-linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.3);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        /* Header UI (Glassmorphism) */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-glass);
+            transition: all 0.4s ease;
+        }
+
+        /* Hero Section */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-greeting {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: -webkit-linear-gradient(45deg, #ffffff, #8be2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-title span {
+            display: block;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            background: -webkit-linear-gradient(45deg, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.35rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 650px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.25rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #0f172a;
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 25px rgba(0, 242, 254, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.25rem;
+            margin-left: auto;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 1.35rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .social-icon:hover {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #0f172a;
+            transform: translateY(-5px) rotate(360deg);
+            border-color: transparent;
+            box-shadow: 0 10px 20px rgba(0, 242, 254, 0.4);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .about-card {
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem 1.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight-icon {
+            font-size: 2.25rem;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.5));
+        }
+
+        .highlight-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .highlight-desc {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            font-weight: 300;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-card {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.25rem;
+            cursor: pointer;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 242, 254, 0.2);
+        }
+
+        .skill-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            font-size: 2.25rem;
+            margin-bottom: 0.5rem;
+            transition: all 0.4s ease;
+            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.05);
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.1);
+        }
+
+        .flutter-color {
+            color: #42a5f5;
+            filter: drop-shadow(0 0 5px rgba(66, 165, 245, 0.5));
+        }
+
+        .dart-color {
+            color: #00b4ab;
+            filter: drop-shadow(0 0 5px rgba(0, 180, 171, 0.5));
+        }
+
+        .firebase-color {
+            color: #ffca28;
+            filter: drop-shadow(0 0 5px rgba(255, 202, 40, 0.5));
+        }
+
+        .api-color {
+            color: #e81cff;
+            filter: drop-shadow(0 0 5px rgba(232, 28, 255, 0.5));
+        }
+
+        .bloc-color {
+            color: #10b981;
+            filter: drop-shadow(0 0 5px rgba(16, 185, 129, 0.5));
+        }
+
+        .arch-color {
+            color: #facc15;
+            filter: drop-shadow(0 0 5px rgba(250, 204, 21, 0.5));
+        }
+
+        .hive-color {
+            color: #f97316;
+            filter: drop-shadow(0 0 5px rgba(249, 115, 22, 0.5));
+        }
+
+        .git-color {
+            color: #ef4444;
+            filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.5));
+        }
+
+        .skill-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            overflow: hidden;
+            group: hover;
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 242, 254, 0.1);
+        }
+
+        .project-header {
+            padding: 2.5rem 2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            border-bottom: 1px solid var(--glass-border);
+            position: relative;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            background: -webkit-linear-gradient(45deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .project-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+        }
+
+        .project-body {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-desc {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tech-badge {
+            background: rgba(255, 255, 255, 0.05);
+            color: #4facfe;
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(79, 172, 254, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            color: #0f172a;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            margin-top: auto;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .project-link:hover {
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+            transform: scale(1.02);
+            color: #0f172a;
+        }
+
+        /* Contact Section */
+        #contact {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-desc {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        .contact-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .contact-card {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 1.5rem;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-card:hover .contact-icon {
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            color: #0f172a;
+            border-color: transparent;
+            transform: rotate(15deg) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-value {
+            font-size: 1.15rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(10px);
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-title span {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            section {
+                padding: 80px 0;
+            }
+
+            #hero {
+                padding-top: 100px;
+                text-align: left;
+            }
+
+            .social-links {
+                margin-left: 0;
+                margin-top: 1rem;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Animated Background Shapes -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container navbar">
+            <a href="#" class="logo">Vinay<span>.</span></a>
+            <nav class="nav-links">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-greeting"><i class="fa-solid fa-hand-wave"></i> Welcome</span>
+                <h1 class="hero-title">
+                    Vinay Parihar
+                    <span>Flutter Developer</span>
+                </h1>
+                <p class="hero-desc">
+                    Flutter Developer with 1.5+ years of experience building scalable, beautiful, and user-friendly
+                    mobile applications for Android and iOS using Clean Architecture.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fa-regular fa-compass"></i> Explore Projects
+                    </a>
+                    <a href="#contact" class="btn btn-secondary glass-card">
+                        <i class="fa-regular fa-paper-plane"></i> Let's Talk
+                    </a>
+
+                    <div class="social-links">
+                        <a href="https://github.com/vinayparihar26" target="_blank" class="social-icon"
+                            aria-label="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/vinayparihar26" target="_blank" class="social-icon"
+                            aria-label="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content glass-card about-card">
+                <div class="about-text">
+                    <p>
+                        I am a passionate Flutter Developer specializing in building high-performance, data-driven
+                        cross-platform applications using Dart. With over 1.5 years of professional experience, I have
+                        developed and maintained complex Android and iOS apps, focusing on robust architectures like
+                        MVVM and Clean Architecture.
+                    </p>
+                    <p>
+                        Currently working as a Junior Flutter Developer at Kods Technologies in Bangalore, I excel at
+                        integrating RESTful APIs safely, managing complex application states via Provider and Bloc, and
+                        implementing seamless offline-first experiences using tools like Hive and Firebase.
+                    </p>
+                </div>
+
+                <div class="about-highlights">
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-layer-group highlight-icon"></i>
+                        <h3 class="highlight-title">Clean Architecture</h3>
+                        <p class="highlight-desc">Developing scalable, maintainable codebase structures using proven
+                            industry standards.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-server highlight-icon"></i>
+                        <h3 class="highlight-title">API Integration</h3>
+                        <p class="highlight-desc">Efficiently connecting complex backends using reliable HTTP
+                            integrations.</p>
+                    </div>
+                    <div class="highlight-card">
+                        <i class="fa-solid fa-mobile-screen-button highlight-icon"></i>
+                        <h3 class="highlight-title">UI/UX Focus</h3>
+                        <p class="highlight-desc">Crafting responsive, high-fidelity interfaces with stunning
+                            micro-animations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Arsenal</h2>
+            <div class="skills-grid">
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon flutter-color"><i class="fa-solid fa-mobile-alt"></i></div>
+                    <span class="skill-name">Flutter</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon dart-color"><i class="fa-solid fa-code"></i></div>
+                    <span class="skill-name">Dart</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon firebase-color"><i class="fa-solid fa-fire"></i></div>
+                    <span class="skill-name">Firebase</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon api-color"><i class="fa-solid fa-network-wired"></i></div>
+                    <span class="skill-name">REST APIs</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon bloc-color"><i class="fa-solid fa-cubes"></i></div>
+                    <span class="skill-name">Provider & Bloc</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon arch-color"><i class="fa-solid fa-sitemap"></i></div>
+                    <span class="skill-name">Clean Architecture</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon hive-color"><i class="fa-solid fa-database"></i></div>
+                    <span class="skill-name">Hive Storage</span>
+                </div>
+
+                <div class="skill-card glass-card">
+                    <div class="skill-icon git-color"><i class="fa-brands fa-git-alt"></i></div>
+                    <span class="skill-name">Git & GitHub</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+
+                <!-- Project 1 -->
+                <div class="project-card glass-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-wallet project-icon"></i>
+                        <h3 class="project-title">Expense Tracker App</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A comprehensive financial tracking application that allows users to
+                            manage their daily expenses, categorize transactions, and view detailed financial reports
+                            with interactive charts.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Flutter</span>
+                            <span class="tech-badge">Provider</span>
+                            <span class="tech-badge">Hive</span>
+                            <span class="tech-badge">FL Chart</span>
+                        </div>
+                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
+                            <i class="fa-brands fa-github"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-gift project-icon"></i>
+                        <h3 class="project-title">Rewards App</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A loyalty program application featuring user authentications,
+                            scan-to-reward mechanics, real-time point tracking, and automated push notifications for
+                            special offers.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Flutter</span>
+                            <span class="tech-badge">Clean Arch</span>
+                            <span class="tech-badge">Firebase</span>
+                            <span class="tech-badge">REST API</span>
+                        </div>
+                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
+                            <i class="fa-brands fa-github"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-store project-icon"></i>
+                        <h3 class="project-title">E-commerce App</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A scalable mobile storefront offering intuitive product browsing, secure
+                            cart management, seamless checkout flows, and responsive UI elements across all screen
+                            sizes.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Flutter</span>
+                            <span class="tech-badge">Bloc</span>
+                            <span class="tech-badge">Dio</span>
+                            <span class="tech-badge">Material UI</span>
+                        </div>
+                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
+                            <i class="fa-brands fa-github"></i> View Source
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="contact-desc">Currently open for new opportunities. Whether you have a question or just want to
+                say hi, I'll try my best to get back to you!</p>
+
+            <div class="contact-cards">
+                <a href="mailto:pariharvinaytaurush@gmail.com" class="contact-card glass-card">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email Me</div>
+                        <div class="contact-value">pariharvinaytaurush@gmail.com</div>
+                    </div>
+                </a>
+
+                <a href="tel:+919981298922" class="contact-card glass-card">
+                    <div class="contact-icon">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">Call Me</div>
+                        <div class="contact-value">+91 9981298922</div>
+                    </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/vinayparihar26" target="_blank" class="contact-card glass-card">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-linkedin-in"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">Connect on LinkedIn</div>
+                        <div class="contact-value">linkedin.com/in/vinayparihar26</div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/vinayparihar26" target="_blank" class="contact-card glass-card">
+                    <div class="contact-icon">
+                        <i class="fa-brands fa-github"></i>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-label">Explore GitHub</div>
+                        <div class="contact-value">github.com/vinayparihar26</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo" style="font-size: 1.5rem;">Vinay<span>.</span></div>
+            <p class="footer-text">Built with HTML & CSS. Designed by Vinay Parihar &copy; 2026</p>
+        </div>
+    </footer>
+
+    <!-- Minimal JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            const header = document.querySelector('header');
+
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.background = 'rgba(15, 23, 42, 0.8)';
+                    header.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.background = 'rgba(15, 23, 42, 0.3)';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '80px';
+                        navLinks.style.left = '0';
+                        navLinks.style.width = '100%';
+                        navLinks.style.background = 'rgba(15, 23, 42, 0.95)';
+                        navLinks.style.padding = '2rem 0';
+                        navLinks.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                        navLinks.style.backdropFilter = 'blur(16px)';
+
+                        const links = navLinks.querySelectorAll('a');
+                        links.forEach(link => {
+                            link.style.padding = '1rem 2rem';
+                            link.style.width = '100%';
+                            link.style.textAlign = 'center';
+                            link.style.fontSize = '1.1rem';
+                        });
+                    }
+                });
+            }
+
+            const links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        navLinks.style.display = 'none';
+                    }
+                });
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    navLinks.style.display = 'flex';
+                    navLinks.style.flexDirection = 'row';
+                    navLinks.style.position = 'static';
+                    navLinks.style.background = 'transparent';
+                    navLinks.style.padding = '0';
+                    navLinks.style.backdropFilter = 'none';
+                    navLinks.style.borderBottom = 'none';
+
+                    const links = navLinks.querySelectorAll('a');
+                    links.forEach(link => {
+                        link.style.padding = '0';
+                        link.style.width = 'auto';
+                        link.style.fontSize = '1rem';
+                    });
+                } else {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
