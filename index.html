@@ -51,6 +51,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            
         }
 
         html {
@@ -155,11 +156,25 @@
         }
 
         /* Section Fallback Gradients (while videos load) */
-        #hero { background: linear-gradient(-45deg, #070e1a, #1a0526); }
-        #about { background: linear-gradient(-45deg, #081224, #140428); }
-        #skills { background: linear-gradient(45deg, #1a0526, #0f172a); }
-        #projects { background: linear-gradient(-45deg, #0f172a, #082d4f); }
-        #contact { background: linear-gradient(45deg, #081224, #31083d); }
+        #hero {
+            background: linear-gradient(-45deg, #070e1a, #1a0526);
+        }
+
+        #about {
+            background: linear-gradient(-45deg, #081224, #140428);
+        }
+
+        #skills {
+            background: linear-gradient(45deg, #1a0526, #0f172a);
+        }
+
+        #projects {
+            background: linear-gradient(-45deg, #0f172a, #082d4f);
+        }
+
+        #contact {
+            background: linear-gradient(45deg, #081224, #31083d);
+        }
 
         .section-title {
             font-size: 2.5rem;
@@ -516,6 +531,71 @@
             font-size: 0.95rem;
             color: var(--text-light);
             font-weight: 300;
+        }
+
+        /* Gallery CSS */
+        .about-gallery {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem 0;
+            z-index: 2;
+        }
+
+        .about-gallery::before,
+        .about-gallery::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .about-gallery::before {
+            left: 0;
+            background: linear-gradient(to right, rgba(14, 21, 38, 0.9), transparent);
+        }
+
+        .about-gallery::after {
+            right: 0;
+            background: linear-gradient(to left, rgba(14, 21, 38, 0.9), transparent);
+        }
+
+        .gallery-track {
+            display: flex;
+            gap: 1.5rem;
+            width: max-content;
+            animation: scrollGallery 25s linear infinite;
+        }
+
+        .gallery-track:hover {
+            animation-play-state: paused;
+        }
+
+        .gallery-img {
+            height: 350px;
+            width: 250px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--glass-border);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        .gallery-img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+        }
+
+        @keyframes scrollGallery {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 0.75rem)); }
         }
 
         /* Skills Section */
@@ -1113,6 +1193,26 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Automatic Scrollable Photo Gallery -->
+            <div class="about-gallery glass-card" style="margin-top:2rem;">
+                <div class="gallery-track">
+                    <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <!-- Duplicates for seamless infinite scrolling -->
+                    <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
+                    <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
+                </div>
+            </div>
+
         </div>
     </section>
 
