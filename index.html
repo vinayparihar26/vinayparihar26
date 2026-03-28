@@ -854,6 +854,136 @@
                 width: 100%;
             }
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 3rem;
+            box-shadow: var(--shadow-glass);
+            position: relative;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            background: none;
+            border: none;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .modal-subtitle {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .modal-desc {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .modal-features {
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .modal-features li {
+            margin-bottom: 0.75rem;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .modal-features li strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .screenshot-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            aspect-ratio: 9/16;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-md);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .screenshot-placeholder:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .screenshot-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 
@@ -963,7 +1093,8 @@
                     <div class="highlight-card">
                         <i class="fa-solid fa-rocket highlight-icon"></i>
                         <h3 class="highlight-title">Deployment & CI/CD</h3>
-                        <p class="highlight-desc">Experienced in automating workflows and deploying apps seamlessly to the App Store and Google Play Store.</p>
+                        <p class="highlight-desc">Experienced in automating workflows and deploying apps seamlessly to
+                            the App Store and Google Play Store.</p>
                     </div>
                 </div>
             </div>
@@ -1046,69 +1177,63 @@
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
 
-                <!-- Project 1 -->
+                <!-- Project 1: Rehotra -->
                 <div class="project-card glass-card">
                     <div class="project-header">
-                        <i class="fa-solid fa-wallet project-icon"></i>
-                        <h3 class="project-title">Expense Tracker App</h3>
+                        <i class="fa-solid fa-home project-icon"></i>
+                        <h3 class="project-title">Rehotra (Rent & House Track)</h3>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">A comprehensive financial tracking application that allows users to
-                            manage their daily expenses, categorize transactions, and view detailed financial reports
-                            with interactive charts.</p>
-                        <div class="project-tech">
-                            <span class="tech-badge">Flutter</span>
-                            <span class="tech-badge">Provider</span>
-                            <span class="tech-badge">Hive</span>
-                            <span class="tech-badge">FL Chart</span>
-                        </div>
-                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
-                            <i class="fa-brands fa-github"></i> View Source
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card glass-card">
-                    <div class="project-header">
-                        <i class="fa-solid fa-gift project-icon"></i>
-                        <h3 class="project-title">Rewards App</h3>
-                    </div>
-                    <div class="project-body">
-                        <p class="project-desc">A loyalty program application featuring user authentications,
-                            scan-to-reward mechanics, real-time point tracking, and automated push notifications for
-                            special offers.</p>
+                        <p class="project-desc">A scalable enterprise property management application built for Kods Technologies, featuring real-time geolocation, interactive dashboards, and offline capabilities.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Flutter</span>
                             <span class="tech-badge">Clean Arch</span>
+                            <span class="tech-badge">Provider</span>
                             <span class="tech-badge">Firebase</span>
-                            <span class="tech-badge">REST API</span>
+                            <span class="tech-badge">Dio</span>
                         </div>
-                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
-                            <i class="fa-brands fa-github"></i> View Source
-                        </a>
+                        <button class="project-link open-modal" data-modal="modal-rehotra" style="cursor:pointer; border:none; width:100%;">
+                            <i class="fa-solid fa-expand"></i> View Details & Screenshots
+                        </button>
                     </div>
                 </div>
 
-                <!-- Project 3 -->
+                <!-- Project 2: MyCo -->
                 <div class="project-card glass-card">
                     <div class="project-header">
-                        <i class="fa-solid fa-store project-icon"></i>
-                        <h3 class="project-title">E-commerce App</h3>
+                        <i class="fa-solid fa-briefcase project-icon"></i>
+                        <h3 class="project-title">MyCo - Business App</h3>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">A scalable mobile storefront offering intuitive product browsing, secure
-                            cart management, seamless checkout flows, and responsive UI elements across all screen
-                            sizes.</p>
+                        <p class="project-desc">A cross-platform business management application built for Communities Heritage Pvt Ltd, optimized for offline data reliability and seamless API integration.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Flutter</span>
-                            <span class="tech-badge">Bloc</span>
-                            <span class="tech-badge">Dio</span>
-                            <span class="tech-badge">Material UI</span>
+                            <span class="tech-badge">MVVM</span>
+                            <span class="tech-badge">Retrofit</span>
+                            <span class="tech-badge">Hive Storage</span>
                         </div>
-                        <a href="https://github.com/vinayparihar26" target="_blank" class="project-link">
-                            <i class="fa-brands fa-github"></i> View Source
-                        </a>
+                        <button class="project-link open-modal" data-modal="modal-myco" style="cursor:pointer; border:none; width:100%;">
+                            <i class="fa-solid fa-expand"></i> View Details & Screenshots
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Project 3: Expense Tracker -->
+                <div class="project-card glass-card">
+                    <div class="project-header">
+                        <i class="fa-solid fa-wallet project-icon"></i>
+                        <h3 class="project-title">Expense Tracker</h3>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A comprehensive personal finance application allowing users to manage daily expenses, categorize transactions, and view detailed financial reports visually.</p>
+                        <div class="project-tech">
+                            <span class="tech-badge">Flutter</span>
+                            <span class="tech-badge">Provider</span>
+                            <span class="tech-badge">FL Chart</span>
+                        </div>
+                        <button class="project-link open-modal" data-modal="modal-expense" style="cursor:pointer; border:none; width:100%;">
+                            <i class="fa-solid fa-expand"></i> View Details & Screenshots
+                        </button>
                     </div>
                 </div>
 
@@ -1166,6 +1291,88 @@
             </div>
         </div>
     </section>
+
+    <!-- Project Modals -->
+    
+    <!-- Modal 1: Rehotra -->
+    <div class="modal-overlay" id="modal-rehotra">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="modal-title">Rehotra (Rent and House Track)</h2>
+            <div class="modal-subtitle">Kods Technologies</div>
+            <p class="modal-desc">
+                An advanced enterprise property management application developed entirely using Flutter and Dart. Engineered to be highly scalable using MVVM and Clean Architecture principles, ensuring a highly maintainable and decoupled codebase.
+            </p>
+            <ul class="modal-features">
+                <li><strong>State Management & Offline:</strong> Managed complex application states via Provider. Implemented robust and reliable offline-first functionality using Hive and SharedPreferences.</li>
+                <li><strong>Enterprise APIs:</strong> Integrated RESTful APIs securely using Dio/Http frameworks.</li>
+                <li><strong>Core Features:</strong> Developed premium features including Firebase Push Notifications and exact real-time geolocation tracking.</li>
+                <li><strong>Reporting:</strong> Engineered interactive visual dashboards with FL Chart and automated Excel/PDF document reporting with heavily optimized UI/UX responses.</li>
+            </ul>
+            <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
+            <div class="screenshot-gallery">
+                <!-- Replace src with your actual image paths -->
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Home Screen</div>
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> FL Chart Dashboard</div>
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> PDF Reports UI</div>
+            </div>
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+                <i class="fa-brands fa-github"></i> View Source Code
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal 2: MyCo -->
+    <div class="modal-overlay" id="modal-myco">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="modal-title">MyCo - Your Business App</h2>
+            <div class="modal-subtitle">Communities Heritage Private Limited</div>
+            <p class="modal-desc">
+                A highly cohesive business operations app designed to improve efficiency and management across multiple workflows, deploying simultaneously on both Android and iOS devices.
+            </p>
+            <ul class="modal-features">
+                <li><strong>Architecture Validation:</strong> Applied strict MVVM and Clean Architecture boundaries for scalable client-side logic.</li>
+                <li><strong>Network Logic:</strong> Integrated diverse RESTful APIs efficiently by utilizing the Retrofit library.</li>
+                <li><strong>Speed Improvements:</strong> Implemented offline storage paradigms with Hive, vastly improving the actual app load speeds and protecting data reliability against spotty connections.</li>
+                <li><strong>UI/UX:</strong> Designed highly responsive UI flows with precise standard Flutter Material Design guidelines.</li>
+            </ul>
+            <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> App Dashboard</div>
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Business Analytics</div>
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Offline Mode</div>
+            </div>
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+                <i class="fa-brands fa-github"></i> View Source Code
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal 3: Expense Tracker -->
+    <div class="modal-overlay" id="modal-expense">
+        <div class="modal-content">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <h2 class="modal-title">Expense Tracker</h2>
+            <div class="modal-subtitle">Personal Project</div>
+            <p class="modal-desc">
+                A personal side-project born out of the need for an absolutely fluid and interactive way to track spending behaviors across categories without cloud reliance.
+            </p>
+            <ul class="modal-features">
+                <li><strong>Zero-Latency Storage:</strong> Entirely local-first design utilizing Hive for instantaneous CRUD transactions.</li>
+                <li><strong>Visualizations:</strong> Fully responsive integration with FL Chart to generate dynamic pie charts and line graphs representing financial health.</li>
+                <li><strong>Reactivity:</strong> State is highly coupled to Provider, immediately reflecting database changes up to the UI without frame drops.</li>
+            </ul>
+            <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
+            <div class="screenshot-gallery">
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Transactions View</div>
+                <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> FL Chart Statistics</div>
+            </div>
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+                <i class="fa-brands fa-github"></i> View Source Code
+            </a>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -1248,6 +1455,41 @@
                 } else {
                     navLinks.style.display = 'none';
                 }
+            });
+
+            // Modal Logic
+            const openModalButtons = document.querySelectorAll('.open-modal');
+            const closeModalButtons = document.querySelectorAll('.modal-close');
+            const modals = document.querySelectorAll('.modal-overlay');
+
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetModalId = button.getAttribute('data-modal');
+                    const targetModal = document.getElementById(targetModalId);
+                    if (targetModal) {
+                        targetModal.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                    }
+                });
+            });
+
+            closeModalButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const modal = button.closest('.modal-overlay');
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto'; // Restore scrolling
+                });
+            });
+
+            // Close modal when clicking outside the content
+            modals.forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
             });
         });
     </script>
