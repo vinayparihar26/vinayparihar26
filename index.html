@@ -51,7 +51,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            
+
         }
 
         html {
@@ -565,15 +565,29 @@
             background: linear-gradient(to left, rgba(14, 21, 38, 0.9), transparent);
         }
 
+        .gallery-container {
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-behavior: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            cursor: grab;
+        }
+
+        .gallery-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-container:active {
+            cursor: grabbing;
+        }
+
         .gallery-track {
             display: flex;
             gap: 1.5rem;
             width: max-content;
-            animation: scrollGallery 25s linear infinite;
-        }
-
-        .gallery-track:hover {
-            animation-play-state: paused;
+            padding: 0 1.5rem;
         }
 
         .gallery-img {
@@ -583,19 +597,14 @@
             border-radius: var(--radius-md);
             border: 2px solid var(--glass-border);
             transition: transform 0.4s ease, border-color 0.4s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            pointer-events: none; /* Prevent image drag interfering with JS drag */
         }
 
         .gallery-img:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             border-color: var(--primary);
             box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
-        }
-
-        @keyframes scrollGallery {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-50% - 0.75rem)); }
         }
 
         /* Skills Section */
@@ -1196,20 +1205,22 @@
 
             <!-- Automatic Scrollable Photo Gallery -->
             <div class="about-gallery glass-card" style="margin-top:2rem;">
-                <div class="gallery-track">
-                    <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <!-- Duplicates for seamless infinite scrolling -->
-                    <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
-                    <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
+                <div class="gallery-container" id="photo-gallery">
+                    <div class="gallery-track">
+                        <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <!-- Duplicates for seamless infinite scrolling -->
+                        <img src="assets/images/photo1.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo2.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo3.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo4.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo5.jpg" alt="Vinay Parihar" class="gallery-img">
+                        <img src="assets/images/photo6.jpg" alt="Vinay Parihar" class="gallery-img">
+                    </div>
                 </div>
             </div>
 
@@ -1634,6 +1645,72 @@
                     }
                 });
             });
+
+            // Photo Gallery Drag & Auto-Scroll Logic
+            const galleryWindow = document.getElementById('photo-gallery');
+            if (galleryWindow) {
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+                let autoScrollInterval;
+
+                // Infinite seamless check
+                const performScrollCheck = () => {
+                    // Start seamlessly resetting scroll if it passed halfway
+                    if (galleryWindow.scrollLeft >= galleryWindow.scrollWidth / 2) {
+                        galleryWindow.scrollLeft = 0;
+                    } else if (galleryWindow.scrollLeft <= 0 && isDown) {
+                        galleryWindow.scrollLeft = galleryWindow.scrollWidth / 2;
+                    }
+                };
+
+                const startAutoScroll = () => {
+                    if (window.innerWidth <= 768) return; // Optional: Don't autoscroll on mobile if touch takes over
+                    autoScrollInterval = setInterval(() => {
+                        galleryWindow.scrollLeft += 1;
+                        performScrollCheck();
+                    }, 20);
+                };
+
+                const stopAutoScroll = () => {
+                    clearInterval(autoScrollInterval);
+                };
+
+                startAutoScroll();
+
+                galleryWindow.addEventListener('mouseenter', stopAutoScroll);
+                galleryWindow.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    startAutoScroll();
+                });
+
+                // Mouse Dragging
+                galleryWindow.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    stopAutoScroll();
+                    startX = e.pageX - galleryWindow.offsetLeft;
+                    scrollLeft = galleryWindow.scrollLeft;
+                });
+
+                galleryWindow.addEventListener('mouseup', () => {
+                    isDown = false;
+                    startAutoScroll();
+                });
+
+                galleryWindow.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - galleryWindow.offsetLeft;
+                    const walk = (x - startX) * 2; 
+                    galleryWindow.scrollLeft = scrollLeft - walk;
+                    performScrollCheck();
+                });
+
+                // Touch support
+                galleryWindow.addEventListener('touchstart', stopAutoScroll, {passive: true});
+                galleryWindow.addEventListener('touchend', startAutoScroll);
+                galleryWindow.addEventListener('touchmove', performScrollCheck, {passive: true});
+            }
         });
     </script>
 </body>
