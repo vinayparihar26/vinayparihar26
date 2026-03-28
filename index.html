@@ -57,32 +57,16 @@
             scroll-behavior: smooth;
         }
 
-        /* Animated Background */
+        /* Unified Base */
         body {
             font-family: var(--font-sans);
             color: var(--text-main);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            background: linear-gradient(-45deg, #0f172a, #31083d, #082d4f, #0f172a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: #050505;
             min-height: 100vh;
             position: relative;
             overflow-x: hidden;
-        }
-
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
         /* Floating Animated Background Shapes */
@@ -149,6 +133,33 @@
             position: relative;
             z-index: 10;
         }
+
+        section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-bg-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translateX(-50%) translateY(-50%);
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* Section Fallback Gradients (while videos load) */
+        #hero { background: linear-gradient(-45deg, #070e1a, #1a0526); }
+        #about { background: linear-gradient(-45deg, #081224, #140428); }
+        #skills { background: linear-gradient(45deg, #1a0526, #0f172a); }
+        #projects { background: linear-gradient(-45deg, #0f172a, #082d4f); }
+        #contact { background: linear-gradient(45deg, #081224, #31083d); }
 
         .section-title {
             font-size: 2.5rem;
@@ -919,7 +930,7 @@
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
-        
+
         .modal-subtitle {
             color: var(--primary);
             font-size: 1.1rem;
@@ -972,7 +983,7 @@
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
-        
+
         .screenshot-placeholder:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: var(--primary);
@@ -1012,6 +1023,8 @@
 
     <!-- Hero Section -->
     <section id="hero">
+        <!-- Add your video inside assets/videos/hero-bg.mp4 -->
+        <video autoplay loop muted playsinline class="section-bg-video" src="assets/videos/hero-bg.mp4"></video>
         <div class="container">
             <div class="hero-wrapper">
                 <div class="hero-content">
@@ -1054,6 +1067,8 @@
 
     <!-- About Section -->
     <section id="about">
+        <!-- Add your video inside assets/videos/about-bg.mp4 -->
+        <video autoplay loop muted playsinline class="section-bg-video" src="assets/videos/about-bg.mp4"></video>
         <div class="container">
             <h2 class="section-title">About Me</h2>
             <div class="about-content glass-card about-card">
@@ -1103,6 +1118,7 @@
 
     <!-- Skills Section -->
     <section id="skills">
+        <video autoplay loop muted playsinline class="section-bg-video" src="assets/videos/skills-bg.mp4"></video>
         <div class="container">
             <h2 class="section-title">Technical Arsenal</h2>
             <div class="skills-grid">
@@ -1173,6 +1189,7 @@
 
     <!-- Projects Section -->
     <section id="projects">
+        <video autoplay loop muted playsinline class="section-bg-video" src="assets/videos/projects-bg.mp4"></video>
         <div class="container">
             <h2 class="section-title">Featured Projects</h2>
             <div class="projects-grid">
@@ -1184,7 +1201,9 @@
                         <h3 class="project-title">Rehotra (Rent & House Track)</h3>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">A scalable enterprise property management application built for Kods Technologies, featuring real-time geolocation, interactive dashboards, and offline capabilities.</p>
+                        <p class="project-desc">A scalable enterprise property management application built for Kods
+                            Technologies, featuring real-time geolocation, interactive dashboards, and offline
+                            capabilities.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Flutter</span>
                             <span class="tech-badge">Clean Arch</span>
@@ -1192,7 +1211,8 @@
                             <span class="tech-badge">Firebase</span>
                             <span class="tech-badge">Dio</span>
                         </div>
-                        <button class="project-link open-modal" data-modal="modal-rehotra" style="cursor:pointer; border:none; width:100%;">
+                        <button class="project-link open-modal" data-modal="modal-rehotra"
+                            style="cursor:pointer; border:none; width:100%;">
                             <i class="fa-solid fa-expand"></i> View Details & Screenshots
                         </button>
                     </div>
@@ -1205,14 +1225,16 @@
                         <h3 class="project-title">MyCo - Business App</h3>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">A cross-platform business management application built for Communities Heritage Pvt Ltd, optimized for offline data reliability and seamless API integration.</p>
+                        <p class="project-desc">A cross-platform business management application built for Communities
+                            Heritage Pvt Ltd, optimized for offline data reliability and seamless API integration.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Flutter</span>
                             <span class="tech-badge">MVVM</span>
                             <span class="tech-badge">Retrofit</span>
                             <span class="tech-badge">Hive Storage</span>
                         </div>
-                        <button class="project-link open-modal" data-modal="modal-myco" style="cursor:pointer; border:none; width:100%;">
+                        <button class="project-link open-modal" data-modal="modal-myco"
+                            style="cursor:pointer; border:none; width:100%;">
                             <i class="fa-solid fa-expand"></i> View Details & Screenshots
                         </button>
                     </div>
@@ -1225,13 +1247,15 @@
                         <h3 class="project-title">Expense Tracker</h3>
                     </div>
                     <div class="project-body">
-                        <p class="project-desc">A comprehensive personal finance application allowing users to manage daily expenses, categorize transactions, and view detailed financial reports visually.</p>
+                        <p class="project-desc">A comprehensive personal finance application allowing users to manage
+                            daily expenses, categorize transactions, and view detailed financial reports visually.</p>
                         <div class="project-tech">
                             <span class="tech-badge">Flutter</span>
                             <span class="tech-badge">Provider</span>
                             <span class="tech-badge">FL Chart</span>
                         </div>
-                        <button class="project-link open-modal" data-modal="modal-expense" style="cursor:pointer; border:none; width:100%;">
+                        <button class="project-link open-modal" data-modal="modal-expense"
+                            style="cursor:pointer; border:none; width:100%;">
                             <i class="fa-solid fa-expand"></i> View Details & Screenshots
                         </button>
                     </div>
@@ -1243,6 +1267,7 @@
 
     <!-- Contact Section -->
     <section id="contact">
+        <video autoplay loop muted playsinline class="section-bg-video" src="assets/videos/contact-bg.mp4"></video>
         <div class="container" style="max-width: 800px;">
             <h2 class="section-title">Let's Connect</h2>
             <p class="contact-desc">Currently open for new opportunities. Whether you have a question or just want to
@@ -1293,7 +1318,7 @@
     </section>
 
     <!-- Project Modals -->
-    
+
     <!-- Modal 1: Rehotra -->
     <div class="modal-overlay" id="modal-rehotra">
         <div class="modal-content">
@@ -1301,13 +1326,18 @@
             <h2 class="modal-title">Rehotra (Rent and House Track)</h2>
             <div class="modal-subtitle">Kods Technologies</div>
             <p class="modal-desc">
-                An advanced enterprise property management application developed entirely using Flutter and Dart. Engineered to be highly scalable using MVVM and Clean Architecture principles, ensuring a highly maintainable and decoupled codebase.
+                An advanced enterprise property management application developed entirely using Flutter and Dart.
+                Engineered to be highly scalable using MVVM and Clean Architecture principles, ensuring a highly
+                maintainable and decoupled codebase.
             </p>
             <ul class="modal-features">
-                <li><strong>State Management & Offline:</strong> Managed complex application states via Provider. Implemented robust and reliable offline-first functionality using Hive and SharedPreferences.</li>
+                <li><strong>State Management & Offline:</strong> Managed complex application states via Provider.
+                    Implemented robust and reliable offline-first functionality using Hive and SharedPreferences.</li>
                 <li><strong>Enterprise APIs:</strong> Integrated RESTful APIs securely using Dio/Http frameworks.</li>
-                <li><strong>Core Features:</strong> Developed premium features including Firebase Push Notifications and exact real-time geolocation tracking.</li>
-                <li><strong>Reporting:</strong> Engineered interactive visual dashboards with FL Chart and automated Excel/PDF document reporting with heavily optimized UI/UX responses.</li>
+                <li><strong>Core Features:</strong> Developed premium features including Firebase Push Notifications and
+                    exact real-time geolocation tracking.</li>
+                <li><strong>Reporting:</strong> Engineered interactive visual dashboards with FL Chart and automated
+                    Excel/PDF document reporting with heavily optimized UI/UX responses.</li>
             </ul>
             <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
             <div class="screenshot-gallery">
@@ -1316,7 +1346,8 @@
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> FL Chart Dashboard</div>
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> PDF Reports UI</div>
             </div>
-            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary"
+                style="margin-top:2rem; width:100%;">
                 <i class="fa-brands fa-github"></i> View Source Code
             </a>
         </div>
@@ -1329,13 +1360,19 @@
             <h2 class="modal-title">MyCo - Your Business App</h2>
             <div class="modal-subtitle">Communities Heritage Private Limited</div>
             <p class="modal-desc">
-                A highly cohesive business operations app designed to improve efficiency and management across multiple workflows, deploying simultaneously on both Android and iOS devices.
+                A highly cohesive business operations app designed to improve efficiency and management across multiple
+                workflows, deploying simultaneously on both Android and iOS devices.
             </p>
             <ul class="modal-features">
-                <li><strong>Architecture Validation:</strong> Applied strict MVVM and Clean Architecture boundaries for scalable client-side logic.</li>
-                <li><strong>Network Logic:</strong> Integrated diverse RESTful APIs efficiently by utilizing the Retrofit library.</li>
-                <li><strong>Speed Improvements:</strong> Implemented offline storage paradigms with Hive, vastly improving the actual app load speeds and protecting data reliability against spotty connections.</li>
-                <li><strong>UI/UX:</strong> Designed highly responsive UI flows with precise standard Flutter Material Design guidelines.</li>
+                <li><strong>Architecture Validation:</strong> Applied strict MVVM and Clean Architecture boundaries for
+                    scalable client-side logic.</li>
+                <li><strong>Network Logic:</strong> Integrated diverse RESTful APIs efficiently by utilizing the
+                    Retrofit library.</li>
+                <li><strong>Speed Improvements:</strong> Implemented offline storage paradigms with Hive, vastly
+                    improving the actual app load speeds and protecting data reliability against spotty connections.
+                </li>
+                <li><strong>UI/UX:</strong> Designed highly responsive UI flows with precise standard Flutter Material
+                    Design guidelines.</li>
             </ul>
             <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
             <div class="screenshot-gallery">
@@ -1343,7 +1380,8 @@
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Business Analytics</div>
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Offline Mode</div>
             </div>
-            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary"
+                style="margin-top:2rem; width:100%;">
                 <i class="fa-brands fa-github"></i> View Source Code
             </a>
         </div>
@@ -1356,19 +1394,24 @@
             <h2 class="modal-title">Expense Tracker</h2>
             <div class="modal-subtitle">Personal Project</div>
             <p class="modal-desc">
-                A personal side-project born out of the need for an absolutely fluid and interactive way to track spending behaviors across categories without cloud reliance.
+                A personal side-project born out of the need for an absolutely fluid and interactive way to track
+                spending behaviors across categories without cloud reliance.
             </p>
             <ul class="modal-features">
-                <li><strong>Zero-Latency Storage:</strong> Entirely local-first design utilizing Hive for instantaneous CRUD transactions.</li>
-                <li><strong>Visualizations:</strong> Fully responsive integration with FL Chart to generate dynamic pie charts and line graphs representing financial health.</li>
-                <li><strong>Reactivity:</strong> State is highly coupled to Provider, immediately reflecting database changes up to the UI without frame drops.</li>
+                <li><strong>Zero-Latency Storage:</strong> Entirely local-first design utilizing Hive for instantaneous
+                    CRUD transactions.</li>
+                <li><strong>Visualizations:</strong> Fully responsive integration with FL Chart to generate dynamic pie
+                    charts and line graphs representing financial health.</li>
+                <li><strong>Reactivity:</strong> State is highly coupled to Provider, immediately reflecting database
+                    changes up to the UI without frame drops.</li>
             </ul>
             <h3 style="color:var(--text-main); margin-top:2rem;">App Screenshots</h3>
             <div class="screenshot-gallery">
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> Transactions View</div>
                 <div class="screenshot-placeholder"><i class="fa-regular fa-image"></i> FL Chart Statistics</div>
             </div>
-            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary" style="margin-top:2rem; width:100%;">
+            <a href="https://github.com/vinayparihar26" target="_blank" class="btn btn-primary"
+                style="margin-top:2rem; width:100%;">
                 <i class="fa-brands fa-github"></i> View Source Code
             </a>
         </div>
