@@ -598,7 +598,8 @@
             border: 2px solid var(--glass-border);
             transition: transform 0.4s ease, border-color 0.4s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            pointer-events: none; /* Prevent image drag interfering with JS drag */
+            pointer-events: none;
+            /* Prevent image drag interfering with JS drag */
         }
 
         .gallery-img:hover {
@@ -1701,15 +1702,15 @@
                     if (!isDown) return;
                     e.preventDefault();
                     const x = e.pageX - galleryWindow.offsetLeft;
-                    const walk = (x - startX) * 2; 
+                    const walk = (x - startX) * 2;
                     galleryWindow.scrollLeft = scrollLeft - walk;
                     performScrollCheck();
                 });
 
                 // Touch support
-                galleryWindow.addEventListener('touchstart', stopAutoScroll, {passive: true});
+                galleryWindow.addEventListener('touchstart', stopAutoScroll, { passive: true });
                 galleryWindow.addEventListener('touchend', startAutoScroll);
-                galleryWindow.addEventListener('touchmove', performScrollCheck, {passive: true});
+                galleryWindow.addEventListener('touchmove', performScrollCheck, { passive: true });
             }
         });
     </script>
