@@ -9,7 +9,7 @@ A modern, responsive, and highly animated personal portfolio website built with 
 - **Zero Frameworks**: An extremely lightweight structure loading entirely with HTML, CSS, and minimal JavaScript.
 
 ## Preview
-Live Demo: [https://vinayparihar26.github.io/vinay_portfolio/](https://vinayparihar26.github.io/vinay_portfolio/)
+Live Demo: [https://vinayparihar26.github.io/vinay_portfolio/](https://vinayparihar26.github.io/vinayparihar26/)
 
 ## Getting Started
 Since this is a static website with zero dependencies, there are no build steps, node modules, or local servers required. Just clone and double click `index.html`.
